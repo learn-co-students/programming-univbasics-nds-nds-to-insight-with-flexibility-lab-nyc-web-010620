@@ -35,13 +35,14 @@ end
 # Your code after this point
 
 def movies_with_director_key(name, movies_collection)
-  movies = []
-  movies_collection.each do |movie|
-    binding.pry
-    movies << movie[:director_name] = movie[name]
-  end
+  #movies_collection.each do |movie|
+    #binding.pry
+     #movie[:director_name] = name
+  #end
 
-  return movies
+   movies_collection.map { |movie| movie_with_director_name(name, movie) }
+
+  #return movies_collection
 
 
 
