@@ -40,11 +40,9 @@ def movies_with_director_key(name, movies_collection)
      #movie[:director_name] = name
   #end
 
-   movies_collection.map { |movie| movie_with_director_name(name, movie) }
-
   #return movies_collection
 
-
+   movies_collection.map { |movie| movie_with_director_name(name, movie) }
 
 
 
@@ -80,6 +78,16 @@ def gross_per_studio(collection)
 end
 
 def movies_with_directors_set(source)
+  new_array = []
+  source.each do |ele|
+    new_array << ele[:movies]
+
+  binding.pry
+  end
+
+  return new_array
+
+
   # GOAL: For each director, find their :movies Array and stick it in a new Array
   #
   # INPUT:
