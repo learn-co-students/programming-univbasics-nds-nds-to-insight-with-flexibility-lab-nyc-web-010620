@@ -64,6 +64,20 @@ end
 
 
 def gross_per_studio(collection)
+  result = {}
+  collection.each do |hash|
+    key = hash[:studio]
+    if result[key]
+      result[key] += hash[:worldwide_gross]
+    else
+      result[key] = hash[:worldwide_gross]
+    end
+
+  end
+
+  result
+
+
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
   # return a Hash that includes the total worldwide_gross of all the movies from
   # each studio.
@@ -80,9 +94,14 @@ end
 def movies_with_directors_set(source)
   new_array = []
   source.each do |ele|
-    new_array << ele[:movies]
+    #new_array << ele[:movies
+    name = ele[:name]
+    movies = ele[:movies]
+    new_array << movies_with_director_key(name, movies)
 
-  binding.pry
+    #binding.pry
+
+
   end
 
   return new_array
