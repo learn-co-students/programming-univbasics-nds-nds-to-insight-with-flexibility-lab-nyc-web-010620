@@ -74,7 +74,6 @@ def gross_per_studio(collection)
     end
 
   end
-
   result
 
 
