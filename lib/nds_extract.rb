@@ -1,6 +1,6 @@
 # Provided, don't edit
 require 'directors_database'
-require 'pry'
+
 
 # A method we're giving you. This "flattens"  Arrays of Arrays so: [[1,2],
 # [3,4,5], [6]] => [1,2,3,4,5,6].
@@ -98,7 +98,7 @@ def movies_with_directors_set(source)
     movies = ele[:movies]
     new_array << movies_with_director_key(name, movies)
 
-    #binding.pry
+    
 
 
   end
