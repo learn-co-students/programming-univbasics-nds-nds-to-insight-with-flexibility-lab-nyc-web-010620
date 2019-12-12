@@ -1,6 +1,7 @@
 # Provided, don't edit
 require 'directors_database'
 
+
 # A method we're giving you. This "flattens"  Arrays of Arrays so: [[1,2],
 # [3,4,5], [6]] => [1,2,3,4,5,6].
 
@@ -21,7 +22,7 @@ def flatten_a_o_a(aoa)
 end
 
 def movie_with_director_name(director_name, movie_data)
-  { 
+  {
     :title => movie_data[:title],
     :worldwide_gross => movie_data[:worldwide_gross],
     :release_year => movie_data[:release_year],
@@ -34,6 +35,17 @@ end
 # Your code after this point
 
 def movies_with_director_key(name, movies_collection)
+  #movies_collection.each do |movie|
+    #binding.pry
+     #movie[:director_name] = name
+  #end
+
+  #return movies_collection
+
+   movies_collection.map { |movie| movie_with_director_name(name, movie) }
+
+
+
   # GOAL: For each Hash in an Array (movies_collection), provide a collection
   # of movies and a directors name to the movie_with_director_name method
   # and accumulate the returned Array of movies into a new Array that's
@@ -52,6 +64,19 @@ end
 
 
 def gross_per_studio(collection)
+  result = {}
+  collection.each do |hash|
+    key = hash[:studio]
+    if result[key]
+      result[key] += hash[:worldwide_gross]
+    else
+      result[key] = hash[:worldwide_gross]
+    end
+
+  end
+  result
+
+
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
   # return a Hash that includes the total worldwide_gross of all the movies from
   # each studio.
@@ -66,6 +91,21 @@ def gross_per_studio(collection)
 end
 
 def movies_with_directors_set(source)
+  new_array = []
+  source.each do |ele|
+    #new_array << ele[:movies
+    name = ele[:name]
+    movies = ele[:movies]
+    new_array << movies_with_director_key(name, movies)
+
+    
+
+
+  end
+
+  return new_array
+
+
   # GOAL: For each director, find their :movies Array and stick it in a new Array
   #
   # INPUT:
