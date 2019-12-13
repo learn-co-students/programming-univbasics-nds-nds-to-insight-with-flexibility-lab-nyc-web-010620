@@ -1,5 +1,7 @@
 # Provided, don't edit
+require "pp"
 require 'directors_database'
+require "pry"
 
 # A method we're giving you. This "flattens"  Arrays of Arrays so: [[1,2],
 # [3,4,5], [6]] => [1,2,3,4,5,6].
@@ -33,11 +35,21 @@ end
 
 # Your code after this point
 
-def movies_with_director_key(name, movies_collection)
-  # GOAL: For each Hash in an Array (movies_collection), provide a collection
+
+
+def movies_with_director_key(name,movies_collection)
+  new_arr = []
+    movies_collection.each do |movie|
+      movie[:director_name] = name
+      new_arr.push(movie)
+    end
+  new_arr
+end
+
+ # GOAL: For each Hash in an Array (movies_collection), provide a collection
   # of movies and a directors name to the movie_with_director_name method
   # and accumulate the returned Array of movies into a new Array that's
-  # returned by this method.
+  # returned by this method. 
   #
   # INPUT:
   # * name: A director's name
@@ -48,25 +60,35 @@ def movies_with_director_key(name, movies_collection)
   # Array of Hashes where each Hash represents a movie; however, they should all have a
   # :director_name key. This addition can be done by using the provided
   # movie_with_director_name method
-end
-
 
 def gross_per_studio(collection)
-  # GOAL: Given an Array of Hashes where each Hash represents a movie,
-  # return a Hash that includes the total worldwide_gross of all the movies from
-  # each studio.
-  #
-  # INPUT:
-  # * collection: Array of Hashes where each Hash where each Hash represents a movie
-  #
-  # RETURN:
-  #
-  # Hash whose keys are the studio names and whose values are the sum
-  # total of all the worldwide_gross numbers for every movie in the input Hash
+ results = {}
+    row_index = 0 
+    total = 0
+        while row_index < collection.length do 
+                    if  results[collection[row_index][:studio]]
+                    results[collection[row_index][:studio]] += collection[row_index][:worldwide_gross]
+                  else 
+                    results[collection[row_index][:studio]] = collection[row_index][:worldwide_gross]
+                  end
+            row_index += 1
+        end
+    results
 end
 
+#movies_with_director_key(name,movies_collection)
+
 def movies_with_directors_set(source)
-  # GOAL: For each director, find their :movies Array and stick it in a new Array
+  source.map do |n|
+    movies_with_director_key(n[:name],n[:movies])
+    end
+end 
+
+# [{:name=>"Byron Poodle", :movies=>[{:title=>"At the park"}, {:title=>"On the couch"}]},
+# {:name=>"Nancy Drew", :movies=>[{:title=>"Biting"}]}]
+
+
+ # GOAL: For each director, find their :movies Array and stick it in a new Array
   #
   # INPUT:
   # * source: An Array of Hashes containing director information including
@@ -76,7 +98,6 @@ def movies_with_directors_set(source)
   #
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
-end
 
 # ----------------    End of Your Code Region --------------------
 # Don't edit the following code! Make the methods above work with this method
