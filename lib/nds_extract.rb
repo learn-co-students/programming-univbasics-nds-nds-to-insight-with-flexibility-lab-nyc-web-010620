@@ -87,3 +87,15 @@ def studios_totals(nds)
   movies_with_director_names = flatten_a_o_a(a_o_a_movies_with_director_names)
   return gross_per_studio(movies_with_director_names)
 end
+
+result = []
+   index = 0
+
+   while index < movies_collection.length do
+     movie_data = movies_collection[index]
+     result << movie_with_director_name(name, movie_data)
+     index += 1
+   end
+
+   result
+ end
